@@ -1,4 +1,5 @@
 import { Schema, ObjectId, Types } from "mongoose";
+import Encryption from "utils/encryption/encryption";
 
 export interface IAccount {
     _id?: string;
@@ -31,6 +32,11 @@ const accountSchema = new Schema<IAccount>({
         ref: 'User',
         required: [true, 'Account owner is required']
     }
+});
+
+accountSchema.pre('save', function (next) {
+    this.password = Encryption.encrypt(this.password);
+    next();
 });
 
 export default accountSchema;
