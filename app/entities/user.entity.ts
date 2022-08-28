@@ -46,6 +46,12 @@ const userSchema = new Schema<IUser>({
     accounts: {
         type: [accountSchema]
     }
+}, {
+    statics: {
+        findByEmail: function (email: string) {
+            return this.findOne({ email });
+        }
+    }
 });
 
 userSchema.pre('save', function (next) {
