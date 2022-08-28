@@ -22,6 +22,12 @@
     "paths": {
       "contexts/*": [
         "app/contexts/*"
+      ],
+      "entities/*": [
+        "app/entities/*"
+      ],
+      "utils/*": [
+        "app/utils/*"
       ]
     }
   },
