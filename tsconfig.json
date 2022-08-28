@@ -29,6 +29,9 @@
       "utils/*": [
         "app/utils/*"
       ],
+      "http/*": [
+        "app/http/*"
+      ],
       "components/*": [
         "components/*"
       ]
