@@ -16,7 +16,6 @@ class MyDocument extends Document {
         return (
             <Html>
                 <Head>
-                    <meta name="viewport" content="initial-scale=1, width=device-width" />
                     <meta name="author" content="Eric Echemane" />
                     <link rel="author" href="https://github.com/ericechemane" />
                     <link

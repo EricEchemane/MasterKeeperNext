@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { setCookie } from 'cookies-next';
 
 const getTheme = (theme: 'light' | 'dark') => createTheme({
     palette: {
@@ -10,10 +11,17 @@ const getTheme = (theme: 'light' | 'dark') => createTheme({
 
 const ThemeContext = createContext<any>(null);
 
-export function ThemeContextProvider(props: { children: JSX.Element; }) {
-    const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+export function ThemeContextProvider(props: {
+    children: JSX.Element;
+    colorScheme: 'light' | 'dark';
+}) {
+    const [theme, setTheme] = useState<'light' | 'dark'>(props.colorScheme);
     const toggleTheme = () => {
-        setTheme(t => t === 'dark' ? 'light' : 'dark');
+        setTheme(t => {
+            const newTheme = t === 'dark' ? 'light' : 'dark';
+            setCookie('master-keeper-theme', newTheme, { maxAge: 60 * 60 * 24 * 30 });
+            return newTheme;
+        });
     };
 
     return <>
