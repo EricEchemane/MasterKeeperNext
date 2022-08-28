@@ -44,8 +44,7 @@ const userSchema = new Schema<IUser>({
         default: Date.now
     },
     accounts: {
-        type: [accountSchema],
-        default: undefined
+        type: [accountSchema]
     }
 });
 
