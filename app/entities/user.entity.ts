@@ -11,7 +11,7 @@ export interface IUser {
     password: string;
     createdOn: Date;
     updatedOn: Date;
-    accounts: [typeof accountSchema];
+    accounts: (typeof accountSchema)[];
 }
 
 const userSchema = new Schema<IUser>({
