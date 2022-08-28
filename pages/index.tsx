@@ -1,6 +1,5 @@
 import { Box, Button, Container } from '@mui/material';
 import useThemeContext from 'contexts/theme';
-import UserAdapters from 'http/adapters/user.adapter';
 import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -15,7 +14,6 @@ export default function Home() {
       router.replace('/sign-in');
     },
   });
-  const adapter = UserAdapters.FindByEmail();
 
   return <>
     <Head> <title> Master Keeper </title> </Head>

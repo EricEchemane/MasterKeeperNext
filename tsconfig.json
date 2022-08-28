@@ -32,6 +32,12 @@
       "http/*": [
         "app/http/*"
       ],
+      "hooks/*": [
+        "app/hooks/*"
+      ],
+      "types/*": [
+        "app/types/*"
+      ],
       "components/*": [
         "components/*"
       ]
