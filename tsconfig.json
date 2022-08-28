@@ -32,6 +32,9 @@
       "http/*": [
         "app/http/*"
       ],
+      "db/*": [
+        "app/db/*"
+      ],
       "hooks/*": [
         "app/hooks/*"
       ],
