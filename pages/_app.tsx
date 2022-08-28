@@ -3,7 +3,8 @@ import { ThemeContextProvider } from 'contexts/theme';
 import { GetServerSidePropsContext } from 'next';
 import { getCookie } from 'cookies-next';
 
-export default function MyApp({ Component, pageProps, colorScheme }: AppProps & { colorScheme: 'light' | 'dark'; }) {
+export default function MyApp({ Component, pageProps, colorScheme }
+  : AppProps & { colorScheme: 'light' | 'dark'; }) {
   return <>
     <ThemeContextProvider colorScheme={colorScheme}>
       <Component {...pageProps} />
@@ -11,7 +12,8 @@ export default function MyApp({ Component, pageProps, colorScheme }: AppProps & 
   </>;
 }
 
-MyApp.getInitialProps = ({ ctx }: { ctx: GetServerSidePropsContext; }) => ({
-  // get color scheme from cookie
-  colorScheme: getCookie('master-keeper-theme', ctx) || 'dark',
-});
+MyApp.getInitialProps = ({ ctx }: { ctx: GetServerSidePropsContext; }) => {
+  return {
+    colorScheme: getCookie('master-keeper-theme', ctx) || 'dark',
+  };
+};
