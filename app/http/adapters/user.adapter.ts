@@ -1,7 +1,10 @@
 import HttpAdapter from "http/base-adapter";
+import useHttpAdapter from "http/useHttpAdapter";
 
-const UserAdapter = {
-    findByEmail: new HttpAdapter('/api/user/:email', 'GET')
-};
+const UserAdapters = Object.freeze({
+    FindByEmail: () => useHttpAdapter
+        <null, { email: string; }>
+        (new HttpAdapter('/api/user/:email', 'GET'))
+});
 
-export default Object.freeze(UserAdapter);
+export default UserAdapters;

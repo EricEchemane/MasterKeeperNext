@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import HttpAdapter from "./base-adapter";
 
-export default function useHttpAdapter<PayloadType>(adapter: HttpAdapter) {
+export default function useHttpAdapter<PayloadType, ParamsType>(adapter: HttpAdapter) {
 
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState<any>();
@@ -10,7 +10,7 @@ export default function useHttpAdapter<PayloadType>(adapter: HttpAdapter) {
 
     const execute = useCallback(async (options?: {
         payload?: PayloadType,
-        params?: { [key: string]: string | number; };
+        params?: ParamsType;
     }) => {
         setLoading(true);
         setError(null);

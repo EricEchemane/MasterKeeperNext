@@ -7,7 +7,7 @@ export default class HttpAdapter {
         this.method = method;
     }
 
-    parseUrlWith(params: { [key: string]: string | number; }) {
+    parseUrlWith(params: any) {
         // dont parase if no params were present in the uri
         if (this.url.includes('/:') === false) return;
 
