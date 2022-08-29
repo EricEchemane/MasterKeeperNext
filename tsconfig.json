@@ -35,15 +35,12 @@
       "db/*": [
         "app/db/*"
       ],
-      "hooks/*": [
-        "app/hooks/*"
-      ],
-      "types/*": [
-        "app/types/*"
-      ],
       "components/*": [
         "components/*"
-      ]
+      ],
+      "hooks/*": [
+        "hooks/*"
+      ],
     }
   },
   "include": [
