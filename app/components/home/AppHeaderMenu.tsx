@@ -1,5 +1,5 @@
 import { DarkModeOutlined, LightModeOutlined, LogoutOutlined, MoreVertOutlined } from '@mui/icons-material';
-import { IconButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Divider, IconButton, ListItemIcon, ListItemText } from '@mui/material';
 import { signOut } from 'next-auth/react';
 import * as React from 'react';
 import Menu from '@mui/material/Menu';
@@ -52,6 +52,7 @@ export default function AppHeaderMenu() {
                     </ListItemIcon>
                     <ListItemText> {isDarkMode ? 'Light theme' : 'Dark theme'} </ListItemText>
                 </MenuItem>
+                <Divider />
                 <MenuItem onClick={signUserOut}>
                     <ListItemIcon>
                         <LogoutOutlined />
