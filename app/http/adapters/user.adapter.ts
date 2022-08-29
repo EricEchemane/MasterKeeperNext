@@ -14,10 +14,10 @@ const UserAdapters = Object.freeze({
 
     AddAccount: () => useHttpAdapter<
         {
-            accountLabel: string;
+            account_label: string;
             username: string;
             password: string;
-            url: string;
+            account_url: string;
         },
         null
     >(new HttpAdapter("/api/user/add-account", 'POST'))
