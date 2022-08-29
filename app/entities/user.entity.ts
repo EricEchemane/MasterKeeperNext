@@ -1,7 +1,7 @@
 import isValidEmail from "utils/email-validator";
 import bcrypt from 'bcryptjs';
 import { Schema } from "mongoose";
-import accountSchema from "./account.entity";
+import accountSchema, { IAccount } from "./account.entity";
 
 export interface IUser {
     _id?: string;
@@ -11,7 +11,7 @@ export interface IUser {
     password: string;
     createdOn?: Date;
     updatedOn?: Date;
-    accounts: (typeof accountSchema)[];
+    accounts: IAccount[];
 }
 
 const userSchema = new Schema<IUser>({
