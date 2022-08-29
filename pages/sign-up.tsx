@@ -1,20 +1,32 @@
+import { LoadingButton } from '@mui/lab';
 import { Avatar, Button, Container, Stack, TextField, Typography } from '@mui/material';
 import useForm from 'hooks/useForm';
 import useRequireSession from 'hooks/useRequireSession';
+import UserAdapters from 'http/adapters/user.adapter';
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 
 export default function SignUp() {
     const session = useRequireSession('/sign-in');
     const [passwordNotMatch, setPasswordNotMatch] = useState(false);
+    const signIn = UserAdapters.SignIn();
     const { values, handleChange } = useForm({
         masterPassword: '',
         confirmMasterPassword: '',
     });
-    const save = () => {
+    const save = async () => {
         if (values.masterPassword !== values.confirmMasterPassword) {
             setPasswordNotMatch(true);
+            return;
         }
+        const data = await signIn.execute({
+            payload: {
+                email: session?.user?.email || '',
+                image: session?.user?.image || '',
+                name: session?.user?.name || '',
+                password: values.masterPassword.toString() || ''
+            }
+        });
     };
     useEffect(() => {
         setPasswordNotMatch(false);
@@ -76,12 +88,19 @@ export default function SignUp() {
                     helperText={passwordNotMatch ? "Password don't match" : ''}
                     onChange={handleChange}
                 />
-                <Button
+                {signIn.error && <Typography
+                    color='red'
+                    fontSize='.8rem'
+                    align='center'>
+                    {signIn.error}
+                </Typography>}
+                <LoadingButton
+                    loading={signIn.loading}
                     disabled={values.confirmMasterPassword === ''}
                     onClick={save}
                     variant='contained'>
                     save
-                </Button>
+                </LoadingButton>
 
             </Stack>
         </Container>
