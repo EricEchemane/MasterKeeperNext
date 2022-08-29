@@ -1,5 +1,5 @@
 import { LoadingButton } from '@mui/lab';
-import { Container, Stack, TextField } from '@mui/material';
+import { Container, Stack, TextField, Typography } from '@mui/material';
 import useForm from 'hooks/useForm';
 import UserAdapters from 'http/adapters/user.adapter';
 import React, { useState } from 'react';
@@ -7,16 +7,30 @@ import GetMasterPasswordModal from './GetMasterPasswordModal';
 
 export default function AddAccountTab() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const { handleChange, values: formValues } = useForm({
+    const { handleChange, values: formValues, validate, errors } = useForm({
         account_label: '',
         username: '',
         password: '',
         account_url: ''
+    }, {
+        account_label: value => {
+            if (value.length < 3) return 'account label should not be less than 3 characters';
+        },
+        username: value => {
+            if (value.trim().length === 0) return 'username is required';
+        },
+        password: value => {
+            if (value.trim().length === 0) return 'password is required';
+        },
     });
     const addAccount = UserAdapters.AddAccount();
 
     const save = async (password: string) => {
-        // validate fields first
+        setModalIsOpen(false);
+
+        const errors = validate();
+        if (errors) return;
+
         const data = await addAccount.execute({
             payload: {
                 master_password: password,
@@ -26,11 +40,9 @@ export default function AddAccountTab() {
                 username: formValues.username,
             }
         });
-        console.log(data);
-    };
-    const receivePassword = (password: string) => {
-        setModalIsOpen(false);
-        save(password);
+        if (data?.success) {
+            console.log(data);
+        }
     };
     const openModal = () => {
         setModalIsOpen(true);
@@ -44,16 +56,22 @@ export default function AddAccountTab() {
                 alignItems={'stretch'}>
 
                 <TextField
+                    error={errors?.account_label}
+                    helperText={errors?.account_label}
                     name='account_label'
                     value={formValues.account_label}
                     onChange={handleChange}
                     label='Account label' required />
                 <TextField
+                    error={errors?.username}
+                    helperText={errors?.username}
                     name='username'
                     value={formValues.username}
                     onChange={handleChange}
                     label='Username' required />
                 <TextField
+                    error={errors?.password}
+                    helperText={errors?.password}
                     name='password'
                     value={formValues.password}
                     onChange={handleChange}
@@ -63,6 +81,12 @@ export default function AddAccountTab() {
                     value={formValues.account_url}
                     onChange={handleChange}
                     label='Url or link to your account' />
+                {addAccount.error && <Typography
+                    color='red'
+                    fontSize='.8rem'
+                    align='center'>
+                    {addAccount.error.message}
+                </Typography>}
                 <LoadingButton
                     loading={addAccount.loading}
                     onClick={openModal}
@@ -74,6 +98,6 @@ export default function AddAccountTab() {
         <GetMasterPasswordModal
             open={modalIsOpen}
             onClose={() => setModalIsOpen(false)}
-            onPasswordSubmitted={receivePassword} />
+            onPasswordSubmitted={save} />
     </>;
 }
