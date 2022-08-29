@@ -1,5 +1,5 @@
 import { IUser } from 'entities/user.entity';
-import { Avatar, Box, Container, Divider, Stack, Typography } from '@mui/material';
+import { Avatar, Box, Container, Stack, Typography } from '@mui/material';
 import AppHeaderMenu from './AppHeaderMenu';
 
 export default function AppHeader({ user }: { user: IUser; }) {
@@ -21,6 +21,5 @@ export default function AppHeader({ user }: { user: IUser; }) {
                 </Stack>
             </Box>
         </Container>
-        <Divider />
     </>;
 }
