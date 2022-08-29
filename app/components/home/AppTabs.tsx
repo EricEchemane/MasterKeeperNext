@@ -16,19 +16,25 @@ export default function AppTabs() {
     return <>
         <Container maxWidth='md'>
             <Box sx={{ width: '100%', typography: 'body1' }} p='1rem'>
-                <TabContext value={value} >
+
+                <TabContext value={value}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <TabList
                             onChange={handleChange}
-                            aria-label="lab API tabs example"
+                            aria-label="accounts"
                             centered>
-                            <Tab label="Item One" value="1" />
-                            <Tab label="Item Two" value="2" />
+                            <Tab label="Your accounts" value="1" />
+                            <Tab label="Add account" value="2" />
                         </TabList>
                     </Box>
-                    <TabPanel value="1">Item One</TabPanel>
-                    <TabPanel value="2">Item Two</TabPanel>
+                    <TabPanel value="1">
+
+                    </TabPanel>
+                    <TabPanel value="2">
+
+                    </TabPanel>
                 </TabContext>
+
             </Box>
         </Container>
     </>;
