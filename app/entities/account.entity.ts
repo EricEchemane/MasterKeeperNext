@@ -13,11 +13,13 @@ export interface IAccount {
 const accountSchema = new Schema<IAccount>({
     account_label: {
         type: String,
-        required: [true, 'Account label is required']
+        required: [true, 'Account label is required'],
+        minLength: [3, 'Account label must be at least 3 characters long']
     },
     username: {
         type: String,
-        required: [true, 'Username is required']
+        required: [true, 'Username is required'],
+        minLength: [3, 'Username must be at least 3 characters long']
     },
     password: {
         type: String,
@@ -25,7 +27,7 @@ const accountSchema = new Schema<IAccount>({
     },
     account_url: {
         type: String,
-        default: undefined
+        default: ''
     },
     owner: {
         type: Types.ObjectId,
