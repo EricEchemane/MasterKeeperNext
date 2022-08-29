@@ -1,9 +1,12 @@
 import { LoadingButton } from '@mui/lab';
 import { Avatar, Container, Stack, TextField, Typography } from '@mui/material';
 import useUserContext from 'contexts/user/user.context';
+import connectToDatabase from 'db/connect-to-database';
 import useForm from 'hooks/useForm';
 import useRequireSession from 'hooks/useRequireSession';
 import UserAdapters from 'http/adapters/user.adapter';
+import { GetServerSideProps } from 'next';
+import { getToken } from 'next-auth/jwt';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -117,3 +120,43 @@ export default function SignUp() {
         </Container>
     </>;
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const token = await getToken({ req: context.req });
+
+    if (!token) {
+        return {
+            redirect: {
+                destination: '/sign-in',
+                permanent: false
+            }
+        };
+    }
+    const db = await connectToDatabase();
+    if (!db) {
+        return {
+            redirect: {
+                destination: '/500',
+                permanent: false
+            }
+        };
+    }
+
+    const { User } = db.models;
+
+    const user = await User.findOne({
+        email: token.email
+    });
+    if (user) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false
+            }
+        };
+    }
+
+    return {
+        props: {}
+    };
+};
