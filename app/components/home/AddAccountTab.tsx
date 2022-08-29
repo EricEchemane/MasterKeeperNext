@@ -16,11 +16,17 @@ export default function AddAccountTab() {
     const addAccount = UserAdapters.AddAccount();
 
     const save = async (password: string) => {
-        // const data = await addAccount.execute({
-        //     payload: {
-        //         master_password: password,
-        //     }
-        // })
+        // validate fields first
+        const data = await addAccount.execute({
+            payload: {
+                master_password: password,
+                account_label: formValues.account_label,
+                account_url: formValues.account_url,
+                password: formValues.password,
+                username: formValues.username,
+            }
+        });
+        console.log(data);
     };
     const receivePassword = (password: string) => {
         setModalIsOpen(false);
