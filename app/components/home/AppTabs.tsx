@@ -5,9 +5,12 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { Container } from '@mui/material';
+import useUserContext from 'contexts/user/user.context';
+import NoAccountStateDisplay from './NoAccountStateDisplay';
 
 export default function AppTabs() {
     const [value, setValue] = React.useState('1');
+    const { state: user } = useUserContext();
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
@@ -28,7 +31,7 @@ export default function AppTabs() {
                         </TabList>
                     </Box>
                     <TabPanel value="1">
-
+                        {user.accounts.length === 0 && <NoAccountStateDisplay />}
                     </TabPanel>
                     <TabPanel value="2">
 
