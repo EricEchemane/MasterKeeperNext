@@ -18,7 +18,7 @@ const style = {
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
+    p: 3,
 };
 
 export default function GetMasterPasswordModal(props: {
@@ -40,7 +40,7 @@ export default function GetMasterPasswordModal(props: {
 
     return (
         <Modal
-            style={{ width: 'min(95vw, 350px)', margin: 'auto' }}
+            style={{ width: 'min(95vw, 450px)', margin: 'auto' }}
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
             open={props.open}
