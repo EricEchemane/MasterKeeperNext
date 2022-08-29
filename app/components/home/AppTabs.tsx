@@ -14,7 +14,7 @@ export default function AppTabs() {
     };
 
     return <>
-        <Container>
+        <Container maxWidth='md'>
             <Box sx={{ width: '100%', typography: 'body1' }} p='1rem'>
                 <TabContext value={value} >
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>

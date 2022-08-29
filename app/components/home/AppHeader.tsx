@@ -4,7 +4,7 @@ import AppHeaderMenu from './AppHeaderMenu';
 
 export default function AppHeader({ user }: { user: IUser; }) {
     return <>
-        <Container>
+        <Container maxWidth='md'>
             <Box p={'1rem'}>
                 <Stack direction='row' alignItems='center' justifyContent='space-between'>
                     <Stack direction='row' spacing={2} alignItems='center'>
