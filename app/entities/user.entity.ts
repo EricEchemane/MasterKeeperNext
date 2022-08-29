@@ -9,8 +9,8 @@ export interface IUser {
     name: string;
     image: string;
     password: string;
-    createdOn: Date;
-    updatedOn: Date;
+    createdOn?: Date;
+    updatedOn?: Date;
     accounts: (typeof accountSchema)[];
 }
 
