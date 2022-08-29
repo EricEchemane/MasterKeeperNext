@@ -13,7 +13,7 @@ export default function SignUp() {
         },
     });
 
-    if (!session) return <></>;
+    if (!session) return <Head> <title>Sign up</title> </Head>;
     return <>
         <Head> <title>Sign up</title> </Head>
 

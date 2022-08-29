@@ -13,6 +13,7 @@ export default function SignIn() {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [session?.user]);
+
     return <>
         <Head> <title>Sign in</title> </Head>
         <Container>
