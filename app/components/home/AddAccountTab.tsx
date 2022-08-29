@@ -1,11 +1,14 @@
 import { LoadingButton } from '@mui/lab';
 import { Container, Stack, TextField, Typography } from '@mui/material';
 import useForm from 'hooks/useForm';
+import useNotification from 'hooks/useNotification';
 import UserAdapters from 'http/adapters/user.adapter';
 import React, { useState } from 'react';
 import GetMasterPasswordModal from './GetMasterPasswordModal';
 
-export default function AddAccountTab() {
+export default function AddAccountTab(props: {
+    onChangeTab: (tab: string) => void;
+}) {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const { handleChange, values: formValues, validate, errors } = useForm({
         account_label: '',
@@ -24,6 +27,7 @@ export default function AddAccountTab() {
         },
     });
     const addAccount = UserAdapters.AddAccount();
+    const notify = useNotification();
 
     const save = async (password: string) => {
         setModalIsOpen(false);
@@ -40,8 +44,9 @@ export default function AddAccountTab() {
                 username: formValues.username,
             }
         });
-        if (data?.success) {
-            console.log(data);
+        if (data) {
+            props.onChangeTab('1');
+            notify('Added successfully', 'success');
         }
     };
     const openModal = () => {
@@ -95,6 +100,7 @@ export default function AddAccountTab() {
                 </LoadingButton>
             </Stack>
         </Container>
+
         <GetMasterPasswordModal
             open={modalIsOpen}
             onClose={() => setModalIsOpen(false)}

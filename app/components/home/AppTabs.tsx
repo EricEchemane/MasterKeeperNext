@@ -38,7 +38,7 @@ export default function AppTabs() {
                             && <NoAccountStateDisplay onAdd={() => setValue('2')} />}
                     </TabPanel>
                     <TabPanel value="2">
-                        <AddAccountTab />
+                        <AddAccountTab onChangeTab={setValue} />
                     </TabPanel>
                 </TabContext>
 

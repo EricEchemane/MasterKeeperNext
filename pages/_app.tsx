@@ -3,13 +3,16 @@ import { ThemeContextProvider } from 'contexts/theme';
 import { GetServerSidePropsContext } from 'next';
 import { getCookie } from 'cookies-next';
 import { UserProvider } from 'contexts/user/user.context';
+import { NotificationProvider } from 'hooks/useNotification';
 
 export default function MyApp({ Component, pageProps, colorScheme }
   : AppProps & { colorScheme: 'light' | 'dark'; }) {
   return <>
     <ThemeContextProvider colorScheme={colorScheme}>
       <UserProvider>
-        <Component {...pageProps} />
+        <NotificationProvider>
+          <Component {...pageProps} />
+        </NotificationProvider>
       </UserProvider>
     </ThemeContextProvider>
   </>;
