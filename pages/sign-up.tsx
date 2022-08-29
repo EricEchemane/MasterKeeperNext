@@ -3,6 +3,7 @@ import { Avatar, Container, Stack, TextField, Typography } from '@mui/material';
 import useUserContext from 'contexts/user/user.context';
 import connectToDatabase from 'db/connect-to-database';
 import useForm from 'hooks/useForm';
+import useNotification from 'hooks/useNotification';
 import useRequireSession from 'hooks/useRequireSession';
 import UserAdapters from 'http/adapters/user.adapter';
 import { GetServerSideProps } from 'next';
@@ -17,10 +18,12 @@ export default function SignUp() {
     const [passwordNotMatch, setPasswordNotMatch] = useState(false);
     const signIn = UserAdapters.SignIn();
     const { dispatch } = useUserContext();
+    const notify = useNotification();
     const { values, handleChange } = useForm({
         masterPassword: '',
         confirmMasterPassword: '',
     });
+
     const save = async () => {
         if (values.masterPassword !== values.confirmMasterPassword) {
             setPasswordNotMatch(true);
@@ -35,10 +38,7 @@ export default function SignUp() {
             }
         });
         if (data) {
-            dispatch({
-                payload: data.data,
-                type: 'set_user'
-            });
+            notify('Your are now registered', 'success');
             router.replace('/');
         }
     };
