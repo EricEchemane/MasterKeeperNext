@@ -2,24 +2,17 @@ import { Box, Button, Container } from '@mui/material';
 import useThemeContext from 'contexts/theme';
 import connectToDatabase from 'db/connect-to-database';
 import { IUser } from 'entities/user.entity';
+import useRequireSession from 'hooks/useRequireSession';
 import { GetServerSideProps } from 'next';
 import { getToken } from 'next-auth/jwt';
-import { useSession } from 'next-auth/react';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import React from 'react';
 
 export default function Home(
   props: { user: IUser; }
 ) {
-  const router = useRouter();
   const { toggleTheme } = useThemeContext();
-  useSession({
-    required: true,
-    onUnauthenticated() {
-      router.replace('/sign-in');
-    },
-  });
+  useRequireSession('/sign-in');
 
   return <>
     <Head> <title> Master Keeper </title> </Head>
