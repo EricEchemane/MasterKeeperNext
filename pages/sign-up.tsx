@@ -1,5 +1,5 @@
 import { LoadingButton } from '@mui/lab';
-import { Avatar, Button, Container, Stack, TextField, Typography } from '@mui/material';
+import { Avatar, Container, Stack, TextField, Typography } from '@mui/material';
 import useForm from 'hooks/useForm';
 import useRequireSession from 'hooks/useRequireSession';
 import UserAdapters from 'http/adapters/user.adapter';
