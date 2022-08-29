@@ -31,7 +31,8 @@ export default function AppTabs() {
                         </TabList>
                     </Box>
                     <TabPanel value="1">
-                        {user.accounts.length === 0 && <NoAccountStateDisplay />}
+                        {user.accounts.length === 0
+                            && <NoAccountStateDisplay onAdd={() => setValue('2')} />}
                     </TabPanel>
                     <TabPanel value="2">
 
