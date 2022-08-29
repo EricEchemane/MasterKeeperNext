@@ -8,7 +8,7 @@ export default function useHttpAdapter<PayloadType, ParamsType>(adapter: HttpAda
     const [error, setError] = useState<any | null>();
     const [data, setData] = useState<any | null>();
 
-    const execute = useCallback(async (options?: {
+    const execute = useCallback(async (options: {
         payload?: PayloadType,
         params?: ParamsType;
     }) => {
@@ -17,11 +17,11 @@ export default function useHttpAdapter<PayloadType, ParamsType>(adapter: HttpAda
         setResponse(null);
         setData(null);
 
-        if (adapter.method === 'POST' && !options?.payload) {
+        if (adapter.method === 'POST' && !options.payload) {
             throw new Error('Payload is required for POST requests');
         }
 
-        if (options?.params) {
+        if (options.params) {
             adapter.parseUrlWith(options?.params);
         }
 
