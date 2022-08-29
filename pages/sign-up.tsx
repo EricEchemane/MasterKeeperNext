@@ -77,6 +77,7 @@ export default function SignUp() {
                     onChange={handleChange}
                 />
                 <Button
+                    disabled={values.confirmMasterPassword === ''}
                     onClick={save}
                     variant='contained'>
                     save
