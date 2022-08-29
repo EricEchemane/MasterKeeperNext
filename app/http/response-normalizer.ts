@@ -40,9 +40,13 @@ export default function normalize(
                 console.error('\n\n==> Error from:', req.url);
                 console.error(error);
 
+                if (error.message.includes('E11000')) {
+                    error.message = 'This email is already in use';
+                }
                 if (error instanceof RequestError) {
                     return res.status(error.code).json(error);
                 }
+
                 return res.status(500).json(new RequestError(500, error.message));
             });
 

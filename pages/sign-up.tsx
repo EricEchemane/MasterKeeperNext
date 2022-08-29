@@ -92,7 +92,7 @@ export default function SignUp() {
                     color='red'
                     fontSize='.8rem'
                     align='center'>
-                    {signIn.error}
+                    {signIn.error.message}
                 </Typography>}
                 <LoadingButton
                     loading={signIn.loading}

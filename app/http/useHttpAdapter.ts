@@ -27,31 +27,34 @@ export default function useHttpAdapter<PayloadType, ParamsType>(adapter: HttpAda
 
         let response: any;
 
-        if (adapter.method === 'GET') {
-            response = await fetch(adapter.url);
-        }
-        else {
-            response = await fetch(adapter.url, {
-                method: adapter.method,
-                body: JSON.stringify(options?.payload),
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
+        try {
+            if (adapter.method === 'GET') {
+                response = await fetch(adapter.url);
+            }
+            else {
+                response = await fetch(adapter.url, {
+                    method: adapter.method,
+                    body: JSON.stringify(options?.payload),
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            }
 
-        setResponse(response);
+            setResponse(response);
 
-        if (response.ok) {
-            const data = await response.json();
-            setData(data.data);
-            return data;
+            if (response.ok) {
+                const data = await response.json();
+                setData(data.data);
+                return data;
+            }
+            else {
+                const error = await response.json();
+                setError(error);
+            }
+        } catch (error: any) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
         }
-        else {
-            const error = await response.json();
-            setError(error);
-        }
-
-        setLoading(false);
-
     }, [adapter]);
 
     return {
