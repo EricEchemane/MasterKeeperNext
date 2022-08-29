@@ -1,15 +1,19 @@
 import { LoadingButton } from '@mui/lab';
 import { Avatar, Container, Stack, TextField, Typography } from '@mui/material';
+import useUserContext from 'contexts/user/user.context';
 import useForm from 'hooks/useForm';
 import useRequireSession from 'hooks/useRequireSession';
 import UserAdapters from 'http/adapters/user.adapter';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 export default function SignUp() {
+    const router = useRouter();
     const session = useRequireSession('/sign-in');
     const [passwordNotMatch, setPasswordNotMatch] = useState(false);
     const signIn = UserAdapters.SignIn();
+    const { dispatch } = useUserContext();
     const { values, handleChange } = useForm({
         masterPassword: '',
         confirmMasterPassword: '',
@@ -27,6 +31,13 @@ export default function SignUp() {
                 password: values.masterPassword.toString() || ''
             }
         });
+        if (data) {
+            dispatch({
+                payload: data.data,
+                type: 'set_user'
+            });
+            router.replace('/');
+        }
     };
     useEffect(() => {
         setPasswordNotMatch(false);

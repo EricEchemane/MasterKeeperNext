@@ -2,17 +2,15 @@ import { Box, Button, Container } from '@mui/material';
 import useThemeContext from 'contexts/theme';
 import connectToDatabase from 'db/connect-to-database';
 import { IUser } from 'entities/user.entity';
-import useRequireSession from 'hooks/useRequireSession';
 import { GetServerSideProps } from 'next';
 import { getToken } from 'next-auth/jwt';
 import Head from 'next/head';
 import React from 'react';
 
 export default function Home(
-  props: { user: IUser; }
+  { user }: { user: IUser; }
 ) {
   const { toggleTheme } = useThemeContext();
-  useRequireSession('/sign-in');
 
   return <>
     <Head> <title> Master Keeper </title> </Head>
