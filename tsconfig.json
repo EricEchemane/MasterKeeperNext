@@ -35,11 +35,11 @@
       "db/*": [
         "app/db/*"
       ],
-      "components/*": [
-        "components/*"
-      ],
       "hooks/*": [
-        "hooks/*"
+        "app/hooks/*"
+      ],
+      "components/*": [
+        "app/components/*"
       ],
     }
   },
