@@ -46,8 +46,7 @@ export default function useHttpAdapter<PayloadType, ParamsType>(adapter: HttpAda
             return data;
         }
         else {
-            const error = await response.json();
-            setError(error);
+            setError(response.statusText);
         }
 
         setLoading(false);
