@@ -1,5 +1,6 @@
 import connectToDatabase from "db/connect-to-database";
 import normalize, { RequestError } from "http/response-normalizer";
+import bcrypt from "bcryptjs";
 import { NextApiRequest } from "next";
 
 async function handler(req: NextApiRequest) {
@@ -13,7 +14,7 @@ async function handler(req: NextApiRequest) {
     const { User } = db.models;
 
     const user = new User({
-        email, name, image, password
+        email, name, image, password: bcrypt.hashSync(password, 10)
     });
 
     await user.save();

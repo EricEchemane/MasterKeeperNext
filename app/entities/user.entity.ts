@@ -56,7 +56,6 @@ const userSchema = new Schema<IUser>({
 });
 
 userSchema.pre('save', function (next) {
-    this.password = bcrypt.hashSync(this.password, 10);
     this.updatedOn = new Date();
     next();
 });
