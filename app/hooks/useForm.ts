@@ -2,9 +2,10 @@ import { useState } from "react";
 
 export default function useForm(
     initialValues: { [key: string]: string; },
-    validators?: { [key: string]: (value: string) => string | null; }
+    validators?: { [key: string]: (value: string) => string | void; }
 ) {
     const [values, setValues] = useState(initialValues);
+    const [errors, setErrors] = useState<any>();
 
     const validate = () => {
         const errors: { [key: string]: string; } = {};
@@ -18,7 +19,9 @@ export default function useForm(
                 }
             }
         });
-        return noErrors ? null : errors;
+        if (noErrors) return null;
+        setErrors(errors);
+        return errors;
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,5 +29,5 @@ export default function useForm(
         setValues(values => ({ ...values, [name]: value }));
     };
 
-    return { values, handleChange, validate };
+    return { values, handleChange, validate, errors };
 }
