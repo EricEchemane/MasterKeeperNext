@@ -1,10 +1,12 @@
 import { LoadingButton } from '@mui/lab';
 import { Container, Stack, TextField } from '@mui/material';
+import UserAdapters from 'http/adapters/user.adapter';
 import React, { useState } from 'react';
 import GetMasterPasswordModal from './GetMasterPasswordModal';
 
 export default function AddAccountTab() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const addAccount = UserAdapters.AddAccount();
 
     const save = async (password: string) => {
 

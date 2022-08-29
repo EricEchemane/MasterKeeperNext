@@ -18,6 +18,7 @@ const UserAdapters = Object.freeze({
             username: string;
             password: string;
             account_url: string;
+            master_password: string;
         },
         null
     >(new HttpAdapter("/api/user/add-account", 'POST'))
