@@ -1,17 +1,10 @@
 import { Avatar, Container, Stack, TextField, Typography } from '@mui/material';
-import { useSession } from 'next-auth/react';
+import useRequireSession from 'hooks/useRequireSession';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import React from 'react';
 
 export default function SignUp() {
-    const router = useRouter();
-    const { data: session } = useSession({
-        required: true,
-        onUnauthenticated() {
-            router.replace('/sign-in');
-        },
-    });
+    const session = useRequireSession('/sign-in');
 
     if (!session) return <Head> <title>Sign up</title> </Head>;
     return <>
