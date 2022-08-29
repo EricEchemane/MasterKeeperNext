@@ -8,9 +8,11 @@ import { Container } from '@mui/material';
 import useUserContext from 'contexts/user/user.context';
 import NoAccountStateDisplay from './NoAccountStateDisplay';
 import AddAccountTab from './AddAccountTab';
+import { useRouter } from 'next/router';
 
 export default function AppTabs() {
-    const [value, setValue] = React.useState('1');
+    const router = useRouter();
+    const [value, setValue] = React.useState(router.query.tab === '2' ? '2' : '1');
     const { state: user } = useUserContext();
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
