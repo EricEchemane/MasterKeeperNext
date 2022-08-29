@@ -7,6 +7,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import { Container } from '@mui/material';
 import useUserContext from 'contexts/user/user.context';
 import NoAccountStateDisplay from './NoAccountStateDisplay';
+import AddAccountTab from './AddAccountTab';
 
 export default function AppTabs() {
     const [value, setValue] = React.useState('1');
@@ -35,7 +36,7 @@ export default function AppTabs() {
                             && <NoAccountStateDisplay onAdd={() => setValue('2')} />}
                     </TabPanel>
                     <TabPanel value="2">
-
+                        <AddAccountTab />
                     </TabPanel>
                 </TabContext>
 
