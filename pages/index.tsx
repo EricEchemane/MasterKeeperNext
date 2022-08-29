@@ -1,4 +1,5 @@
 import AppHeader from 'components/home/AppHeader';
+import AppTabs from 'components/home/AppTabs';
 import connectToDatabase from 'db/connect-to-database';
 import { IUser } from 'entities/user.entity';
 import { GetServerSideProps } from 'next';
@@ -12,6 +13,7 @@ export default function Home(
   return <>
     <Head> <title> Master Keeper </title> </Head>
     <AppHeader user={user} />
+    <AppTabs />
   </>;
 }
 
