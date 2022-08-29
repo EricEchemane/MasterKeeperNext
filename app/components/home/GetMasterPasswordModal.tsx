@@ -57,6 +57,7 @@ export default function GetMasterPasswordModal(props: {
                             Please enter your master password
                         </Typography>
                         <TextField
+                            autoFocus
                             error={hasError}
                             helperText={hasError && 'Please enter your master password'}
                             name='password'
