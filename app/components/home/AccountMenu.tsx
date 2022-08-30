@@ -54,7 +54,7 @@ export default function AccountMenu(props: { account: IAccount; }) {
                     <ListItemIcon>
                         <DeleteForeverOutlined color='error' />
                     </ListItemIcon>
-                    <ListItemText sx={{ color: '#f44336' }}> Remove this account </ListItemText>
+                    <ListItemText sx={{ color: '#ff5338' }}> Remove this account </ListItemText>
                 </MenuItem>
             </Menu>
         </div>
