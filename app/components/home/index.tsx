@@ -4,7 +4,7 @@ import { signIn } from 'next-auth/react';
 import Head from 'next/head';
 import React from 'react';
 
-export default function Landing() {
+export default function Landing(props: { loading: boolean; }) {
     return <>
         <Head> <title> Master Keeper </title> </Head>
         <Container maxWidth='sm'>
@@ -25,12 +25,13 @@ export default function Landing() {
                 </Typography>
 
                 <Button
+                    disabled={props.loading}
                     sx={{ marginTop: '5rem' }}
                     size='large'
                     endIcon={<Google />}
                     variant="outlined"
                     onClick={() => signIn('google')}>
-                    Continue with Google
+                    {props.loading ? 'Signing in...' : 'Continue with Google'}
                 </Button>
             </Stack>
         </Container>

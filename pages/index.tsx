@@ -32,7 +32,7 @@ export default function Home() {
 
   if (user.email === '' || !session) return <>
     {getUser.loading && <LinearProgress />}
-    <Landing />
+    <Landing loading={getUser.loading} />
   </>;
   return <Grow in={user.email !== ''}>
     <div>
