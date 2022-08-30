@@ -1,4 +1,4 @@
-import { DeleteForeverOutlined, EditOutlined, MoreHoriz, VisibilityOutlined } from '@mui/icons-material';
+import { DeleteForeverOutlined, EditOutlined, MoreHoriz } from '@mui/icons-material';
 import { Divider, IconButton, ListItemIcon, ListItemText } from '@mui/material';
 import * as React from 'react';
 import Menu from '@mui/material/Menu';
@@ -35,14 +35,6 @@ export default function AccountMenu(props: { account: IAccount; }) {
                 MenuListProps={{
                     'aria-labelledby': 'basic-button',
                 }}>
-
-                <MenuItem>
-                    <ListItemIcon>
-                        <VisibilityOutlined />
-                    </ListItemIcon>
-                    <ListItemText> View </ListItemText>
-                </MenuItem>
-                <Divider />
                 <MenuItem>
                     <ListItemIcon>
                         <EditOutlined />
