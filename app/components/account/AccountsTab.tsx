@@ -3,6 +3,7 @@ import { Box, Button, Card, Stack, Typography, useMediaQuery } from '@mui/materi
 import { IAccount } from 'entities/account.entity';
 import React from 'react';
 import AccountMenu from './AccountMenu';
+import DecryptPassword from './DecryptPassword';
 
 export default function AccountsTab({ accounts }: { accounts: IAccount[]; }) {
     const isSmallDevice = useMediaQuery('(max-width:600px)');
@@ -24,7 +25,7 @@ export default function AccountsTab({ accounts }: { accounts: IAccount[]; }) {
                                 </Stack>
                                 <Stack direction='row' alignItems='center'>
                                     <Typography variant='body2' mr={1}> password: </Typography>
-                                    <Button size='small'> decrypt </Button>
+                                    <DecryptPassword account={account} />
                                 </Stack>
                                 {account.account_url.startsWith('http')
                                     ? <Button
