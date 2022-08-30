@@ -4,7 +4,7 @@ import useUserContext from 'contexts/user/user.context';
 import useForm from 'hooks/useForm';
 import useNotification from 'hooks/useNotification';
 import UserAdapters from 'http/adapters/user.adapter';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import GetMasterPasswordModal from './GetMasterPasswordModal';
 
 export default function AddAccountTab(props: {
@@ -30,6 +30,7 @@ export default function AddAccountTab(props: {
     const addAccount = UserAdapters.AddAccount();
     const notify = useNotification();
     const { dispatch } = useUserContext();
+    const [addAccountError, setAddAccountError] = useState<any>();
 
     const save = async (password: string) => {
         setModalIsOpen(false);
@@ -58,6 +59,12 @@ export default function AddAccountTab(props: {
     const openModal = () => {
         setModalIsOpen(true);
     };
+
+    useEffect(() => {
+        if (!!addAccount.error) {
+            setAddAccountError(addAccount.error.message || 'Something went wrong');
+        }
+    }, [addAccount.error]);
 
     return <>
         <Container maxWidth='xs' style={{ padding: 0 }}>
@@ -92,11 +99,11 @@ export default function AddAccountTab(props: {
                     value={formValues.account_url}
                     onChange={handleChange}
                     label='Url or link to your account' />
-                {addAccount.error && <Typography
+                {addAccountError && <Typography
                     color='red'
                     fontSize='.8rem'
                     align='center'>
-                    {addAccount.error.message}
+                    {addAccountError}
                 </Typography>}
                 <LoadingButton
                     loading={addAccount.loading}
