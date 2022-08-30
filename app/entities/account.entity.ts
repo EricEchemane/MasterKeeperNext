@@ -37,7 +37,6 @@ const accountSchema = new Schema<IAccount>({
 });
 
 accountSchema.pre('save', function (next) {
-    this.password = Encryption.encrypt(this.password);
     next();
 });
 

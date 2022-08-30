@@ -3,6 +3,7 @@ import connectToDatabase from "db/connect-to-database";
 import normalize, { RequestError } from "http/response-normalizer";
 import { NextApiRequest } from "next";
 import { JWT } from "next-auth/jwt";
+import Encryption from 'utils/encryption/encryption';
 
 async function handler(req: NextApiRequest, token: JWT) {
     const {
@@ -30,7 +31,7 @@ async function handler(req: NextApiRequest, token: JWT) {
     const account = new Account({
         account_label,
         username,
-        password,
+        password: Encryption.encrypt(password),
         account_url,
         owner: user._id
     });
