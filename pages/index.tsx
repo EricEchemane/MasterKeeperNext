@@ -1,4 +1,4 @@
-import { Grow } from '@mui/material';
+import { Grow, LinearProgress } from '@mui/material';
 import Landing from 'components/home';
 import AppHeader from 'components/home/AppHeader';
 import AppTabs from 'components/home/AppTabs';
@@ -30,7 +30,10 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (user.email === '' || !session) return <Landing />;
+  if (user.email === '' || !session) return <>
+    {getUser.loading && <LinearProgress />}
+    <Landing />
+  </>;
   return <Grow in={user.email !== ''}>
     <div>
       <Head> <title> Master Keeper </title> </Head>
