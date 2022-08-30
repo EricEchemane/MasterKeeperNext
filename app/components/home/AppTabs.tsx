@@ -9,6 +9,7 @@ import useUserContext from 'contexts/user/user.context';
 import NoAccountStateDisplay from './NoAccountStateDisplay';
 import AddAccountTab from './AddAccountTab';
 import { useRouter } from 'next/router';
+import AccountsTab from './AccountsTab';
 
 export default function AppTabs() {
     const router = useRouter();
@@ -35,7 +36,8 @@ export default function AppTabs() {
                     </Box>
                     <TabPanel value="1">
                         {user.accounts.length === 0
-                            && <NoAccountStateDisplay onAdd={() => setValue('2')} />}
+                            ? <NoAccountStateDisplay onAdd={() => setValue('2')} />
+                            : <AccountsTab accounts={user.accounts} />}
                     </TabPanel>
                     <TabPanel value="2">
                         <AddAccountTab onChangeTab={setValue} />
