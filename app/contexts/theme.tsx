@@ -1,7 +1,6 @@
 import CssBaseline from '@mui/material/CssBaseline';
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { setCookie } from 'cookies-next';
 import { SessionProvider } from 'next-auth/react';
 
 const getTheme = (theme: 'light' | 'dark') => createTheme({
@@ -14,6 +13,7 @@ const ThemeContext = createContext<any>(null);
 
 export function ThemeContextProvider(props: {
     children: JSX.Element;
+    colorScheme?: 'light' | 'dark';
     pageProps?: {
         session: any;
     };
@@ -22,10 +22,15 @@ export function ThemeContextProvider(props: {
     const toggleTheme = () => {
         setTheme(t => {
             const newTheme = t === 'dark' ? 'light' : 'dark';
-            setCookie('master-keeper-theme', newTheme);
+            localStorage.setItem('master-keeper-theme', newTheme);
             return newTheme;
         });
     };
+
+    useEffect(() => {
+        const t: any = localStorage.getItem('master-keeper-theme') || 'dark';
+        setTheme(t);
+    }, []);
 
     return <>
         <ThemeContext.Provider value={{
