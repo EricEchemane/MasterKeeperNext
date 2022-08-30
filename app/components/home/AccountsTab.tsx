@@ -1,7 +1,8 @@
-import { MoreHoriz, OpenInNewOutlined } from '@mui/icons-material';
-import { Box, Button, Card, Divider, IconButton, Link, Stack, Typography } from '@mui/material';
+import { OpenInNewOutlined } from '@mui/icons-material';
+import { Box, Button, Card, Stack } from '@mui/material';
 import { IAccount } from 'entities/account.entity';
 import React from 'react';
+import AccountMenu from './AccountMenu';
 
 export default function AccountsTab({ accounts }: { accounts: IAccount[]; }) {
     return <>
@@ -18,9 +19,7 @@ export default function AccountsTab({ accounts }: { accounts: IAccount[]; }) {
                                     {account.account_label}
                                 </Button>
                                 : <Button> {account.account_label} </Button>}
-                            <IconButton>
-                                <MoreHoriz />
-                            </IconButton>
+                            <AccountMenu account={account} />
                         </Stack>
                     </Box>
                 </Card>
