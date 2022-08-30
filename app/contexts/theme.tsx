@@ -1,5 +1,5 @@
 import CssBaseline from '@mui/material/CssBaseline';
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { SessionProvider } from 'next-auth/react';
 import { setCookie } from 'cookies-next';
