@@ -2,8 +2,8 @@ import crypto from 'crypto';
 
 export default class Encryption {
     private static algorithm = 'aes-256-cbc';
-    private static iv = crypto.randomBytes(16);
-    private static key = crypto.randomBytes(32);
+    private static iv = Buffer.from(process.env.IV || '');
+    private static key = Buffer.from(process.env.KEY || '');
 
     static encrypt = (plainAccountPassword: string) => {
         const cipher = crypto.createCipheriv(this.algorithm, this.key, this.iv);
