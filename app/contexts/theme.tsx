@@ -23,7 +23,7 @@ export function ThemeContextProvider(props: {
     const toggleTheme = () => {
         setTheme(t => {
             const newTheme = t === 'dark' ? 'light' : 'dark';
-            setCookie('master-keeper-theme', newTheme, { maxAge: 60 * 60 * 24 * 30 });
+            setCookie('master-keeper-theme', newTheme);
             return newTheme;
         });
     };
