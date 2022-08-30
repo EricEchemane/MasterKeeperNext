@@ -1,6 +1,5 @@
 import { LoadingButton } from '@mui/lab';
 import { Avatar, Container, Stack, TextField, Typography } from '@mui/material';
-import useUserContext from 'contexts/user/user.context';
 import connectToDatabase from 'db/connect-to-database';
 import useForm from 'hooks/useForm';
 import useNotification from 'hooks/useNotification';
@@ -14,10 +13,9 @@ import React, { useEffect, useState } from 'react';
 
 export default function SignUp() {
     const router = useRouter();
-    const session = useRequireSession('/sign-in');
+    const session = useRequireSession('/');
     const [passwordNotMatch, setPasswordNotMatch] = useState(false);
     const signIn = UserAdapters.SignIn();
-    const { dispatch } = useUserContext();
     const notify = useNotification();
     const { values, handleChange } = useForm({
         masterPassword: '',
@@ -115,7 +113,6 @@ export default function SignUp() {
                     variant='contained'>
                     save
                 </LoadingButton>
-
             </Stack>
         </Container>
     </>;
@@ -127,7 +124,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     if (!token) {
         return {
             redirect: {
-                destination: '/sign-in',
+                destination: '/',
                 permanent: false
             }
         };

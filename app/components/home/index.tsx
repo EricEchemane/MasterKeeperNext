@@ -1,28 +1,13 @@
-import { signIn, useSession } from "next-auth/react";
-import { Box, Button, Container, Grid, Stack, Typography, useMediaQuery } from '@mui/material';
-import React, { useEffect } from 'react';
-import { useRouter } from "next/router";
-import Head from "next/head";
-import { Google } from "@mui/icons-material";
-import useNotification from "hooks/useNotification";
-import Image from "next/image";
+import { Google } from '@mui/icons-material';
+import { Button, Container, Grid, Stack, Typography, useMediaQuery } from '@mui/material';
+import { signIn } from 'next-auth/react';
+import Head from 'next/head';
+import React from 'react';
 
-export default function SignIn() {
-    const { data: session } = useSession();
-    const router = useRouter();
-    const notify = useNotification();
+export default function Landing() {
     const isSmallDevice = useMediaQuery('(max-width:600px)');
-
-    useEffect(() => {
-        if (session?.user) {
-            notify(`Welcome ${session.user.name}!`, 'success');
-            router.replace('/');
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [session?.user]);
-
     return <>
-        <Head> <title>Sign in</title> </Head>
+        <Head> <title> Master Keeper </title> </Head>
         <Container maxWidth='md'>
 
             <Grid container mt='2rem'>
