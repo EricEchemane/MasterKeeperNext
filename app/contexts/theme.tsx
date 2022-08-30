@@ -14,12 +14,11 @@ const ThemeContext = createContext<any>(null);
 
 export function ThemeContextProvider(props: {
     children: JSX.Element;
-    colorScheme: 'light' | 'dark';
     pageProps?: {
         session: any;
     };
 }) {
-    const [theme, setTheme] = useState<'light' | 'dark'>(props.colorScheme);
+    const [theme, setTheme] = useState<'light' | 'dark'>('dark');
     const toggleTheme = () => {
         setTheme(t => {
             const newTheme = t === 'dark' ? 'light' : 'dark';
