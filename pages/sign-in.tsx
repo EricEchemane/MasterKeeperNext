@@ -43,7 +43,7 @@ export default function SignIn() {
                 </Grid>
             </Grid>
 
-            {/* <Stack justifyContent='stretch' py='3rem'>
+            <Stack justifyContent='stretch' py='3rem'>
                 <Button
                     size='large'
                     endIcon={<Google />}
@@ -51,7 +51,7 @@ export default function SignIn() {
                     onClick={() => signIn('google')}>
                     Continue with Google
                 </Button>
-            </Stack> */}
+            </Stack>
         </Container>
     </>;
 }
