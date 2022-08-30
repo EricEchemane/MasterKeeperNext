@@ -4,12 +4,15 @@ import React, { useEffect } from 'react';
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { Google } from "@mui/icons-material";
+import useNotification from "hooks/useNotification";
 
 export default function SignIn() {
     const { data: session } = useSession();
     const router = useRouter();
+    const notify = useNotification();
     useEffect(() => {
         if (session?.user) {
+            notify(`Welcome ${session.user.name}!`, 'success');
             router.replace('/');
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
