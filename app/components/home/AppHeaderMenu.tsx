@@ -1,4 +1,4 @@
-import { DarkModeOutlined, LightModeOutlined, LogoutOutlined, MoreVertOutlined } from '@mui/icons-material';
+import { DarkModeOutlined, LightModeOutlined, LogoutOutlined, MenuOutlined } from '@mui/icons-material';
 import { Divider, IconButton, ListItemIcon, ListItemText } from '@mui/material';
 import { signOut } from 'next-auth/react';
 import * as React from 'react';
@@ -35,7 +35,7 @@ export default function AppHeaderMenu() {
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
                 aria-label='menu'>
-                <MoreVertOutlined />
+                <MenuOutlined />
             </IconButton>
 
             <Menu
