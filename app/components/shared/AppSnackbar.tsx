@@ -10,15 +10,15 @@ export default function AppSnackbar(props: {
 }) {
 
     const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
-        if (reason === 'clickaway') {
-            return;
-        }
+        // if (reason === 'clickaway') {
+        //     return;
+        // }
         props.onClose();
     };
 
     return <>
         <Snackbar open={props.open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            <Alert onClose={handleClose} severity={props.severity} sx={{ width: '100%' }}>
                 {props.message}
             </Alert>
         </Snackbar>
