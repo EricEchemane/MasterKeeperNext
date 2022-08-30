@@ -1,8 +1,9 @@
 import { Button } from '@mui/material';
 import GetMasterPasswordModal from 'components/home/GetMasterPasswordModal';
 import { IAccount } from 'entities/account.entity';
+import useNotification from 'hooks/useNotification';
 import UserAdapters from 'http/adapters/user.adapter';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function DecryptPassword(props: {
     account: IAccount;
@@ -11,6 +12,7 @@ export default function DecryptPassword(props: {
     const [decrypted, setDecrypted] = useState(false);
     const [decryptedPassword, setDecryptedPassword] = useState<string>();
     const decryptAdapter = UserAdapters.DecryptAccount();
+    const notify = useNotification();
 
     const decrypt = async (password: string) => {
         const data = await decryptAdapter.execute({
@@ -37,6 +39,12 @@ export default function DecryptPassword(props: {
         }
         setModalIsOpen(true);
     };
+
+    useEffect(() => {
+        if (!decryptAdapter.error) return;
+        notify(decryptAdapter.error.message || 'Something went wrong', 'error');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [decryptAdapter.error]);
 
     return <>
         {decrypted
