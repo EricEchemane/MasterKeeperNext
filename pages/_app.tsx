@@ -1,11 +1,12 @@
 import type { AppProps } from 'next/app';
-import { ThemeContextProvider } from 'contexts/theme';
+import { ThemeContextProvider, themeType } from 'contexts/theme';
 import { UserProvider } from 'contexts/user/user.context';
 import { NotificationProvider } from 'hooks/useNotification';
+import { getCookie } from 'cookies-next';
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({ Component, pageProps, theme }: AppProps & { theme: themeType; }) {
   return <>
-    <ThemeContextProvider>
+    <ThemeContextProvider theme={theme}>
       <UserProvider>
         <NotificationProvider>
           <Component {...pageProps} />
@@ -14,3 +15,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     </ThemeContextProvider>
   </>;
 }
+
+MyApp.getInitialProps = ({ ctx }: any) => {
+  const theme = getCookie('master-keeper-theme', ctx);
+  return { theme };
+};
