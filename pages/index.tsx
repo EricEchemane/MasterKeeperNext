@@ -6,17 +6,22 @@ import useUserContext from 'contexts/user/user.context';
 import UserAdapters from 'http/adapters/user.adapter';
 import { useSession } from 'next-auth/react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 export default function Home() {
   const { data: session } = useSession();
   const { dispatch, state: user } = useUserContext();
   const getUser = UserAdapters.Get();
+  const router = useRouter();
 
   useEffect(() => {
     getUser.execute({})
       .then(data => {
-        if (!data) return;
+        if (!data) {
+          router.replace('/sign-up');
+          return;
+        }
         dispatch({
           type: 'set_user',
           payload: data.data

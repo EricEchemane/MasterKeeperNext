@@ -1,38 +1,34 @@
 import { Google } from '@mui/icons-material';
-import { Button, Container, Grid, Stack, Typography, useMediaQuery } from '@mui/material';
+import { Button, Container, Stack, Typography } from '@mui/material';
 import { signIn } from 'next-auth/react';
 import Head from 'next/head';
 import React from 'react';
 
 export default function Landing() {
-    const isSmallDevice = useMediaQuery('(max-width:600px)');
     return <>
         <Head> <title> Master Keeper </title> </Head>
-        <Container maxWidth='md'>
+        <Container maxWidth='sm'>
+            <Stack mt='4rem'>
+                <Typography
+                    variant="h2">
+                    Master Keeper
+                </Typography>
 
-            <Grid container mt='2rem'>
-                <Grid item xs={12} sm={6} p='1rem'>
-                    <Stack alignItems={isSmallDevice ? 'center' : 'flex-start'}>
-                        <Typography
-                            align={isSmallDevice ? 'center' : 'left'}
-                            variant="h2">
-                            Master Keeper
-                        </Typography>
-                        <Typography variant='body1'>
+                <Typography mt='2rem'>
+                    🔑 An encrypted account storage system.
+                </Typography>
+                <Typography my='1rem'>
+                    🔐 Store your accounts safely and securely.
+                </Typography>
+                <Typography>
+                    🗝️ Passwords encrypted and managed by your single master password.
+                </Typography>
 
-                        </Typography>
-                    </Stack>
-                </Grid>
-                <Grid item xs={12} sm={6} p='1rem'>
-                    Hello
-                </Grid>
-            </Grid>
-
-            <Stack justifyContent='stretch' py='3rem'>
                 <Button
+                    sx={{ marginTop: '5rem' }}
                     size='large'
                     endIcon={<Google />}
-                    variant="contained"
+                    variant="outlined"
                     onClick={() => signIn('google')}>
                     Continue with Google
                 </Button>
