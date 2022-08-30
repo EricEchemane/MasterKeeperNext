@@ -1,5 +1,6 @@
 import { LoadingButton } from '@mui/lab';
 import { Container, Stack, TextField, Typography } from '@mui/material';
+import useUserContext from 'contexts/user/user.context';
 import useForm from 'hooks/useForm';
 import useNotification from 'hooks/useNotification';
 import UserAdapters from 'http/adapters/user.adapter';
@@ -28,6 +29,7 @@ export default function AddAccountTab(props: {
     });
     const addAccount = UserAdapters.AddAccount();
     const notify = useNotification();
+    const { dispatch } = useUserContext();
 
     const save = async (password: string) => {
         setModalIsOpen(false);
@@ -45,6 +47,10 @@ export default function AddAccountTab(props: {
             }
         });
         if (data) {
+            dispatch({
+                type: "set_user",
+                payload: data.data
+            });
             props.onChangeTab('1');
             notify('Added successfully', 'success');
         }
