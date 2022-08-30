@@ -1,11 +1,11 @@
 import { LoadingButton } from '@mui/lab';
 import { Container, Stack, TextField, Typography } from '@mui/material';
+import GetMasterPasswordModal from 'components/home/GetMasterPasswordModal';
 import useUserContext from 'contexts/user/user.context';
 import useForm from 'hooks/useForm';
 import useNotification from 'hooks/useNotification';
 import UserAdapters from 'http/adapters/user.adapter';
 import React, { useEffect, useState } from 'react';
-import GetMasterPasswordModal from './GetMasterPasswordModal';
 
 export default function AddAccountTab(props: {
     onChangeTab: (tab: string) => void;

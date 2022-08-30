@@ -6,10 +6,10 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { Container } from '@mui/material';
 import useUserContext from 'contexts/user/user.context';
-import NoAccountStateDisplay from './NoAccountStateDisplay';
-import AddAccountTab from './AddAccountTab';
 import { useRouter } from 'next/router';
-import AccountsTab from './AccountsTab';
+import NoAccountStateDisplay from 'components/account/NoAccountStateDisplay';
+import AccountsTab from 'components/account/AccountsTab';
+import AddAccountTab from 'components/account/AddAccountTab';
 
 export default function AppTabs() {
     const router = useRouter();
