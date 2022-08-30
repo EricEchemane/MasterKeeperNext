@@ -26,7 +26,7 @@ async function handler(req: NextApiRequest, token: JWT) {
         throw new RequestError(401, 'Master password is incorrect');
     }
 
-    const account = user.accounts.find((account: IAccount) => account._id === account_id);
+    const account = user.accounts.find((account: any) => account._id.toString() === account_id);
     if (!account) {
         throw new RequestError(404, "Account not found");
     }
