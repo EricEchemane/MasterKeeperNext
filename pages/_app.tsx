@@ -7,7 +7,7 @@ import NextApp from 'next/app';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return <>
-    <ThemeContextProvider theme={pageProps.theme}>
+    <ThemeContextProvider theme={pageProps.theme || 'dark'}>
       <UserProvider>
         <NotificationProvider>
           <Component {...pageProps} />
@@ -17,14 +17,14 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   </>;
 }
 
-MyApp.getInitialProps = async (appContext: any) => {
-  const appProps = await NextApp.getInitialProps(appContext);
-  const theme = getCookie('master-keeper-theme', appContext.ctx);
-  return {
-    ...appProps,
-    pageProps: {
-      ...appProps.pageProps,
-      theme
-    },
-  };
-};
+// MyApp.getInitialProps = async (appContext: any) => {
+//   const appProps = await NextApp.getInitialProps(appContext);
+//   const theme = getCookie('master-keeper-theme', appContext.ctx);
+//   return {
+//     ...appProps,
+//     pageProps: {
+//       ...appProps.pageProps,
+//       theme
+//     },
+//   };
+// };
