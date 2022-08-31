@@ -1,6 +1,5 @@
 import bcrypt from 'bcryptjs';
 import connectToDatabase from "db/connect-to-database";
-import { IAccount } from 'entities/account.entity';
 import normalize, { RequestError } from "http/response-normalizer";
 import { NextApiRequest } from "next";
 import { JWT } from "next-auth/jwt";
