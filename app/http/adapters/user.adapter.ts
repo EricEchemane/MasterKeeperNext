@@ -33,6 +33,18 @@ const UserAdapters = Object.freeze({
         },
         null
     >(new HttpAdapter("/api/account/decrypt", 'POST')),
+
+    EditAccount: () => useHttpAdapter<
+        {
+            account_id: string;
+            master_password: string;
+            account_label?: string;
+            username?: string;
+            account_url?: string;
+            password?: string;
+        },
+        null
+    >(new HttpAdapter("/api/account/edit", 'POST')),
 });
 
 export default UserAdapters;
