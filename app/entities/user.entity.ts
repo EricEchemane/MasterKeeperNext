@@ -1,5 +1,4 @@
 import isValidEmail from "utils/email-validator";
-import bcrypt from 'bcryptjs';
 import { Schema } from "mongoose";
 import accountSchema, { IAccount } from "./account.entity";
 
