@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { LoadingButton } from '@mui/lab';
 import UserAdapters from 'http/adapters/user.adapter';
 import useUserContext from 'contexts/user/user.context';
+import useNotification from 'hooks/useNotification';
 
 export default function EditAccountDialog(props: {
     open: boolean;
@@ -37,6 +38,7 @@ export default function EditAccountDialog(props: {
     const editAccount = UserAdapters.EditAccount();
     const adapter = UserAdapters.EditAccount();
     const { dispatch } = useUserContext();
+    const notify = useNotification();
 
     const handleClose = () => {
         props.close();
@@ -45,22 +47,24 @@ export default function EditAccountDialog(props: {
         const errors = validate();
         if (errors) return;
 
-        const data = await adapter.execute({
-            payload: {
-                account_id: props.account._id || '',
-                master_password: formValues.master_password,
-                account_label: formValues.account_label,
-                account_url: formValues.account_url,
-                password: formValues.password,
-                username: formValues.username,
-            }
-        });
+        const payload = {
+            account_id: props.account._id || '',
+            master_password: formValues.master_password,
+            account_label: formValues.account_label,
+            account_url: formValues.account_url,
+            password: formValues.password,
+            username: formValues.username,
+        };
+
+        const data = await adapter.execute({ payload });
         if (data) {
             dispatch({
                 type: 'set_user',
                 payload: data.data
             });
             handleClose();
+            notify('Account saved', 'success');
+            console.log(data);
         }
     };
 

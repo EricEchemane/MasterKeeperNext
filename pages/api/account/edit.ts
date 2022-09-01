@@ -44,9 +44,9 @@ async function handler(req: NextApiRequest, token: JWT) {
     if (username) {
         account.username = username;
     }
-    if (account_url) {
-        account.account_url = account_url;
-    }
+    if (account_url) account.account_url = account_url;
+    else account.account_url = "";
+
     if (password && password.trim() !== '') {
         account.password = Encryption.encrypt(password);
     }
