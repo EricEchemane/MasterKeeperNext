@@ -16,10 +16,11 @@ export default function AccountMenu(props: { account: IAccount; }) {
         setAnchorEl(null);
     };
 
-    const { openModal } = useEditAccount();
+    const { openModal, setAccount } = useEditAccount();
     const edit = () => {
         handleClose();
-        openModal(props.account);
+        setAccount(props.account);
+        openModal();
     };
 
     return (
