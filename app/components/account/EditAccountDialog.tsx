@@ -49,7 +49,7 @@ export default function EditAccountDialog(props: {
                 maxWidth='xs'
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Edit"}
+                    {`Edit ${formValues.account_label || ''}`}
                 </DialogTitle>
                 <DialogContent sx={{ width: '100%' }}>
                     <Stack
