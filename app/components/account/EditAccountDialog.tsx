@@ -7,10 +7,10 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { IAccount } from 'entities/account.entity';
 
-export default function ViewAccountDialog(props: {
+export default function EditAccountDialog(props: {
     open: boolean;
     close: () => void;
-    account: IAccount;
+    account?: IAccount;
 }) {
 
     const handleClose = () => {
