@@ -45,6 +45,11 @@ const UserAdapters = Object.freeze({
         },
         null
     >(new HttpAdapter("/api/account/edit", 'POST')),
+
+    RemoveAccount: () => useHttpAdapter<
+        { account_id: string; },
+        null
+    >(new HttpAdapter("/api/account/remove", 'POST')),
 });
 
 export default UserAdapters;
