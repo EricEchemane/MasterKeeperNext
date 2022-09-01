@@ -1,12 +1,26 @@
 import { OpenInNewOutlined } from '@mui/icons-material';
 import { Box, Button, Card, Stack, Typography, useMediaQuery } from '@mui/material';
 import { IAccount } from 'entities/account.entity';
-import React from 'react';
+import React, { useState } from 'react';
 import AccountMenu from './AccountMenu';
 import DecryptPassword from './DecryptPassword';
+import EditAccountDialog from './EditAccountDialog';
 
 export default function AccountsTab({ accounts }: { accounts: IAccount[]; }) {
     const isSmallDevice = useMediaQuery('(max-width:600px)');
+    const [editAccountDialogIsOpen, setEditAccountDialogIsOpen] = useState(false);
+    const [account, setAccount] = useState<IAccount | null>();
+
+    const openEditDialog = () => setEditAccountDialogIsOpen(true);
+    const closeEditDialog = () => {
+        setAccount(null);
+        setEditAccountDialogIsOpen(false);
+    };
+    const edit = (_account: IAccount) => {
+        setAccount(_account);
+        openEditDialog();
+    };
+
     return <>
         <Stack spacing={2}>
             {accounts.map(account => (
@@ -37,11 +51,15 @@ export default function AccountsTab({ accounts }: { accounts: IAccount[]; }) {
                                     </Button>
                                     : <Button variant='outlined'> {account.account_label} </Button>}
                             </Stack>
-                            <AccountMenu account={account} />
+                            <AccountMenu account={account} onEdit={edit} />
                         </Stack>
                     </Box>
                 </Card>
             ))}
         </Stack>
+        {account && <EditAccountDialog
+            close={closeEditDialog}
+            account={account}
+            open={editAccountDialogIsOpen} />}
     </>;
 }

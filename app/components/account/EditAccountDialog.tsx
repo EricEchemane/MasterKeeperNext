@@ -14,12 +14,12 @@ import UserAdapters from 'http/adapters/user.adapter';
 export default function EditAccountDialog(props: {
     open: boolean;
     close: () => void;
-    account?: IAccount;
+    account: IAccount;
 }) {
     const { handleChange, values: formValues, validate, errors } = useForm({
-        account_label: props.account?.account_label || '',
-        username: props.account?.username || '',
-        account_url: props.account?.account_url || '',
+        account_label: props.account.account_label,
+        username: props.account.username,
+        account_url: props.account.account_url,
         password: '',
     }, {
         account_label: value => {

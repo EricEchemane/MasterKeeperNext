@@ -5,7 +5,10 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { IAccount } from 'entities/account.entity';
 
-export default function AccountMenu(props: { account: IAccount; }) {
+export default function AccountMenu(props: {
+    account: IAccount;
+    onEdit: (acc: IAccount) => void;
+}) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -17,6 +20,7 @@ export default function AccountMenu(props: { account: IAccount; }) {
 
     const edit = () => {
         handleClose();
+        props.onEdit(props.account);
     };
 
     return (
