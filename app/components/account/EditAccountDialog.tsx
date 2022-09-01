@@ -21,6 +21,7 @@ export default function EditAccountDialog(props: {
         username: props.account.username,
         account_url: props.account.account_url,
         password: '',
+        master_password: '',
     }, {
         account_label: value => {
             if (value.length < 3) return 'account label should not be less than 3 characters';
@@ -28,14 +29,33 @@ export default function EditAccountDialog(props: {
         username: value => {
             if (value.trim().length === 0) return 'username is required';
         },
-        password: value => {
-            if (value.trim().length === 0) return 'password is required';
-        },
+        master_password: value => {
+            if (value.trim().length === 0) return 'Master password is required';
+        }
     });
     const editAccount = UserAdapters.EditAccount();
-    const [editAccountError, setEditAccountError] = useState<any>();
+    const adapter = UserAdapters.EditAccount();
+
     const handleClose = () => {
         props.close();
+    };
+    const save = async () => {
+        const errors = validate();
+        if (errors) return;
+
+        const data = await adapter.execute({
+            payload: {
+                account_id: props.account._id || '',
+                master_password: formValues.master_password,
+                account_label: formValues.account_label,
+                account_url: formValues.account_url,
+                password: formValues.password,
+                username: formValues.username,
+            }
+        });
+        if (data) {
+            console.log(data);
+        }
     };
 
     return (
@@ -77,12 +97,21 @@ export default function EditAccountDialog(props: {
                             name='password'
                             value={formValues.password}
                             onChange={handleChange}
-                            label='New Password' required />
+                            label='New Password' />
                         <TextField
                             name='account_url'
                             value={formValues.account_url}
                             onChange={handleChange}
                             label='Url or link to your account' />
+                        <TextField
+                            required
+                            type='password'
+                            error={errors?.master_password}
+                            helperText={errors?.master_password}
+                            name='master_password'
+                            value={formValues.master_password}
+                            onChange={handleChange}
+                            label='Your master password' />
                     </Stack>
                 </DialogContent>
                 <DialogActions>
@@ -91,7 +120,7 @@ export default function EditAccountDialog(props: {
                     </Button>
                     <LoadingButton
                         loading={editAccount.loading}
-                        onClick={handleClose}
+                        onClick={save}
                         variant='contained'>
                         save
                     </LoadingButton>
