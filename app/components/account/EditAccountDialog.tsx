@@ -10,6 +10,7 @@ import { Stack, TextField } from '@mui/material';
 import { useState } from 'react';
 import { LoadingButton } from '@mui/lab';
 import UserAdapters from 'http/adapters/user.adapter';
+import useUserContext from 'contexts/user/user.context';
 
 export default function EditAccountDialog(props: {
     open: boolean;
@@ -35,6 +36,7 @@ export default function EditAccountDialog(props: {
     });
     const editAccount = UserAdapters.EditAccount();
     const adapter = UserAdapters.EditAccount();
+    const { dispatch } = useUserContext();
 
     const handleClose = () => {
         props.close();
@@ -54,7 +56,11 @@ export default function EditAccountDialog(props: {
             }
         });
         if (data) {
-            console.log(data);
+            dispatch({
+                type: 'set_user',
+                payload: data.data
+            });
+            handleClose();
         }
     };
 
