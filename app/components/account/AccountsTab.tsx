@@ -5,11 +5,14 @@ import React, { useState } from 'react';
 import AccountMenu from './AccountMenu';
 import DecryptPassword from './DecryptPassword';
 import EditAccountDialog from './EditAccountDialog';
+import RemoveAccountDialog from './RemoveAccountDialog';
 
 export default function AccountsTab({ accounts }: { accounts: IAccount[]; }) {
     const isSmallDevice = useMediaQuery('(max-width:600px)');
     const [editAccountDialogIsOpen, setEditAccountDialogIsOpen] = useState(false);
+    const [removeAccountDialogIsOpen, setRemoveAccountDialogIsOpen] = useState(false);
     const [account, setAccount] = useState<IAccount | null>();
+    const [idToRemove, setIdToRemove] = useState<string>();
 
     const openEditDialog = () => setEditAccountDialogIsOpen(true);
     const closeEditDialog = () => {
@@ -19,6 +22,13 @@ export default function AccountsTab({ accounts }: { accounts: IAccount[]; }) {
     const edit = (_account: IAccount) => {
         setAccount(_account);
         openEditDialog();
+    };
+    const remove = (id: string) => {
+        setRemoveAccountDialogIsOpen(true);
+        setIdToRemove(id);
+    };
+    const confirmRemove = () => {
+        console.log(idToRemove);
     };
 
     return <>
@@ -51,7 +61,7 @@ export default function AccountsTab({ accounts }: { accounts: IAccount[]; }) {
                                     </Button>
                                     : <Button variant='outlined'> {account.account_label} </Button>}
                             </Stack>
-                            <AccountMenu account={account} onEdit={edit} />
+                            <AccountMenu account={account} onEdit={edit} onRemove={() => remove(account._id || '')} />
                         </Stack>
                     </Box>
                 </Card>
@@ -61,5 +71,11 @@ export default function AccountsTab({ accounts }: { accounts: IAccount[]; }) {
             close={closeEditDialog}
             account={account}
             open={editAccountDialogIsOpen} />}
+
+        <RemoveAccountDialog
+            open={removeAccountDialogIsOpen}
+            onClose={() => setRemoveAccountDialogIsOpen(false)}
+            onConfirm={confirmRemove}
+        />
     </>;
 }

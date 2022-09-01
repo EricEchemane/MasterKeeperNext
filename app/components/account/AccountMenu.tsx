@@ -8,6 +8,7 @@ import { IAccount } from 'entities/account.entity';
 export default function AccountMenu(props: {
     account: IAccount;
     onEdit: (acc: IAccount) => void;
+    onRemove: () => void;
 }) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -21,6 +22,10 @@ export default function AccountMenu(props: {
     const edit = () => {
         handleClose();
         props.onEdit(props.account);
+    };
+    const remove = () => {
+        handleClose();
+        props.onRemove();
     };
 
     return (
@@ -51,7 +56,7 @@ export default function AccountMenu(props: {
                         <ListItemText> Edit </ListItemText>
                     </MenuItem>
                     <Divider />
-                    <MenuItem>
+                    <MenuItem onClick={remove}>
                         <ListItemIcon>
                             <DeleteForeverOutlined color='error' />
                         </ListItemIcon>
