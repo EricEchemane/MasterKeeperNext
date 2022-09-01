@@ -1,6 +1,5 @@
 import { OpenInNewOutlined } from '@mui/icons-material';
 import { Box, Button, Card, Stack, Typography, useMediaQuery } from '@mui/material';
-import { EditAccountProvider } from 'contexts/edit-account';
 import { IAccount } from 'entities/account.entity';
 import React from 'react';
 import AccountMenu from './AccountMenu';
@@ -8,7 +7,7 @@ import DecryptPassword from './DecryptPassword';
 
 export default function AccountsTab({ accounts }: { accounts: IAccount[]; }) {
     const isSmallDevice = useMediaQuery('(max-width:600px)');
-    return <EditAccountProvider>
+    return <>
         <Stack spacing={2}>
             {accounts.map(account => (
                 <Card key={account._id}>
@@ -44,5 +43,5 @@ export default function AccountsTab({ accounts }: { accounts: IAccount[]; }) {
                 </Card>
             ))}
         </Stack>
-    </EditAccountProvider>;
+    </>;
 }

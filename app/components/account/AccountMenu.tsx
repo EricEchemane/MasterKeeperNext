@@ -4,7 +4,6 @@ import * as React from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { IAccount } from 'entities/account.entity';
-import useEditAccount from 'contexts/edit-account';
 
 export default function AccountMenu(props: { account: IAccount; }) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -16,11 +15,8 @@ export default function AccountMenu(props: { account: IAccount; }) {
         setAnchorEl(null);
     };
 
-    const { openModal, setAccount } = useEditAccount();
     const edit = () => {
         handleClose();
-        setAccount(props.account);
-        openModal();
     };
 
     return (

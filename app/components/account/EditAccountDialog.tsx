@@ -53,8 +53,8 @@ export default function EditAccountDialog(props: {
                 </DialogTitle>
                 <DialogContent sx={{ width: '100%' }}>
                     <Stack
-                        py='3rem'
-                        spacing={5}
+                        py='1rem'
+                        spacing={3}
                         alignItems={'stretch'}>
 
                         <TextField
@@ -77,7 +77,7 @@ export default function EditAccountDialog(props: {
                             name='password'
                             value={formValues.password}
                             onChange={handleChange}
-                            label='Password' required />
+                            label='New Password' required />
                         <TextField
                             name='account_url'
                             value={formValues.account_url}
