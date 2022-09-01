@@ -18,6 +18,7 @@ async function handler(req: NextApiRequest, token: JWT) {
     }
 
     user.accounts = user.accounts.filter((account: any) => account._id.toString() !== account_id);
+    await user.save();
 
     return user;
 }

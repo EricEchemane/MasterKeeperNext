@@ -1,6 +1,8 @@
 import { OpenInNewOutlined } from '@mui/icons-material';
 import { Box, Button, Card, Stack, Typography, useMediaQuery } from '@mui/material';
+import useUserContext from 'contexts/user/user.context';
 import { IAccount } from 'entities/account.entity';
+import UserAdapters from 'http/adapters/user.adapter';
 import React, { useState } from 'react';
 import AccountMenu from './AccountMenu';
 import DecryptPassword from './DecryptPassword';
@@ -13,6 +15,8 @@ export default function AccountsTab({ accounts }: { accounts: IAccount[]; }) {
     const [removeAccountDialogIsOpen, setRemoveAccountDialogIsOpen] = useState(false);
     const [account, setAccount] = useState<IAccount | null>();
     const [idToRemove, setIdToRemove] = useState<string>();
+    const removeAccountAdapter = UserAdapters.RemoveAccount();
+    const { dispatch } = useUserContext();
 
     const openEditDialog = () => setEditAccountDialogIsOpen(true);
     const closeEditDialog = () => {
@@ -27,8 +31,18 @@ export default function AccountsTab({ accounts }: { accounts: IAccount[]; }) {
         setRemoveAccountDialogIsOpen(true);
         setIdToRemove(id);
     };
-    const confirmRemove = () => {
-        console.log(idToRemove);
+    const confirmRemove = async () => {
+        if (!idToRemove) return;
+        const data = await removeAccountAdapter.execute({
+            payload: { account_id: idToRemove }
+        });
+        if (data) {
+            dispatch({
+                type: 'set_user',
+                payload: data.data
+            });
+            setRemoveAccountDialogIsOpen(false);
+        }
     };
 
     return <>
