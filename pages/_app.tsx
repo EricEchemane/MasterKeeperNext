@@ -2,8 +2,8 @@ import type { AppProps } from 'next/app';
 import { ThemeContextProvider } from 'contexts/theme';
 import { UserProvider } from 'contexts/user/user.context';
 import { NotificationProvider } from 'hooks/useNotification';
-import { getCookie } from 'cookies-next';
-import NextApp from 'next/app';
+// import { getCookie } from 'cookies-next';
+// import NextApp from 'next/app';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return <>
