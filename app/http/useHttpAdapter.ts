@@ -1,7 +1,13 @@
 import { useCallback, useState } from "react";
 import HttpAdapter from "./base-adapter";
 
-export default function useHttpAdapter<PayloadType, ParamsType>(adapter: HttpAdapter) {
+export default function useHttpAdapter<PayloadType, ParamsType>(
+    adapter: HttpAdapter,
+    callbacks = {
+        onSuccess: () => { },
+        onFailed: () => { },
+    }
+) {
 
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState<any>();
@@ -44,17 +50,21 @@ export default function useHttpAdapter<PayloadType, ParamsType>(adapter: HttpAda
             if (response.ok) {
                 const data = await response.json();
                 setData(data.data);
+                callbacks.onSuccess();
                 return data;
             }
             else {
                 const error = await response.json();
                 setError(error);
+                callbacks.onFailed();
             }
         } catch (error: any) {
             setError(error.message);
+            callbacks.onFailed();
         } finally {
             setLoading(false);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [adapter]);
 
     return {
