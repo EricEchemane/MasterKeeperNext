@@ -14,7 +14,7 @@ export default async function connectToDatabase(): Promise<typeof mongoose | nul
         }
         if (!mongoose.models.User) mongoose.model('User', userSchema);
         if (!mongoose.models.Account) mongoose.model('Account', accountSchema);
-        const connection = await mongoose.connect(process.env.MONGODB_URI);
+        const connection = await mongoose.connect(process.env.MONGODB_URI, { dbName: 'masterkeeper' });
 
         database = connection;
         // console.log('connection created');
